@@ -71,6 +71,7 @@ object reposo {
 class Nave{
 	var property velocidad
 
+	//usar metodo de velocidad maxima y min y max
 	method propulsar() {
 	  if(velocidad <= 280000){
 		velocidad = velocidad + 20000
