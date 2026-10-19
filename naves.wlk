@@ -68,6 +68,39 @@ object reposo {
 
 }
 
+class Nave{
+	var property velocidad
+
+	method propulsar() {
+	  if(velocidad <= 280000){
+		velocidad = velocidad + 20000
+	  }else{
+		velocidad = 300000
+	  }
+	}
+}
+
+class NaveCombate inherits Nave{
+
+}
+
+class NavePasajeros inherits Nave{
+	var property cantidadPersonas 
+	var alarmaEmergencia = true
+	
+	method recibirAmenaza(){
+		alarmaEmergencia = true
+	}
+
+
+}
+
+class NaveResiduosRadioactivos inherits NaveDeCarga{
+	method recibirAmenaza() {
+	  velocidad = 0
+	}
+}
+
 object ataque {
 
 	method invisible() = true
