@@ -1,18 +1,39 @@
 class Nave {
 	var property velocidad
+	var property maximoVelocidad = 300000
 	
 	method propulsar() {
-		if (self.velocidad() <= 280000) {
+		if (self.velocidad() <= (maximoVelocidad - 20000)) {
 			velocidad += 20000
 		} else {
-			velocidad = 300000
+			velocidad = maximoVelocidad
+		}
+	}
+	
+	method prepararParaViajar() {
+		if (self.velocidad() <= (maximoVelocidad - 15000)) {
+			velocidad += 15000
+		} else {
+			velocidad = maximoVelocidad
 		}
 	}
 }
 
 class NaveDeResiduosRadioactivos inherits NaveDeCarga {
+	var property selladaAlVacio = false
+	
 	override method recibirAmenaza() {
 		velocidad = 0
+	}
+	
+	override method prepararParaViajar() {
+		if (self.velocidad() <= (maximoVelocidad - 15000)) {
+			velocidad += 15000
+		} else {
+			velocidad = maximoVelocidad
+		}
+		
+		selladaAlVacio = true
 	}
 }
 
@@ -65,6 +86,21 @@ class NaveDeCombate inherits Nave {
 	
 	method recibirAmenaza() {
 		modo.recibirAmenaza(self)
+	}
+	
+	override method prepararParaViajar() {
+		if (self.velocidad() <= (maximoVelocidad - 15000)) {
+			velocidad += 15000
+		} else {
+			velocidad = maximoVelocidad
+		}
+		
+		self.emitirMensajeDeViaje()
+	}
+	
+	method emitirMensajeDeViaje() {
+		if (modo == ataque) self.emitirMensaje("Volviendo a la base")
+		else self.emitirMensaje("Saliendo en misión")
 	}
 }
 
